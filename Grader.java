@@ -3,22 +3,30 @@ import java.util.Arrays;
 
 public class Grader {
 
-
+    static String[] code = GeneratedCode.code.split("");
 
     private static int cowCount = 0;
     private static int bullCount = 0;
-
-
-    public static void grader() {
-
+    private static boolean codeCorrect = true;
 
 
 
-        for (int i = 0; i < TryPassword.getInputCode().length; i++) {
+    public static boolean isCodeCorrect() {
+        return codeCorrect;
+    }
 
-            if (TryPassword.getInputCode()[i].equals(Password.getPassword()[i])) {
+
+    public static void grader(String n) {
+
+        String[] splitCode = n.split("");
+
+
+
+        for (int i = 0; i < n.length(); i++) {
+
+            if (splitCode[i].equals(code[i])) {
                 Grader.bullCount++;
-            } else if (Arrays.asList(Password.getPassword()).contains(TryPassword.getInputCode()[i])) {
+            } else if (Arrays.asList(code).contains(splitCode[i])) {
                 Grader.cowCount++;
             }
         }
@@ -28,7 +36,17 @@ public class Grader {
         } else {
             InfoPrinting.somethingHit();
         }
+
+
+        if (bullCount == code.length) {
+            codeCorrect = false;
+            InfoPrinting.congratulations();
+        }
+
+        bullCount = 0;
+        cowCount = 0;
     }
+
 
 
     public static int getCowCount() {

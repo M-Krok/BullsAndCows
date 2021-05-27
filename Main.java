@@ -8,28 +8,34 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
 
+
+
+        int turnCounter = 1;
+
+        InfoPrinting.inputInfo();
+
         int n = scan.nextInt();
 
-        if (n > 10) {
-            System.out.println("Error: can't generate a secret number with a length of" +
-                    n + "because there aren't enough unique digits.");
-        } else {
-            String code = GeneratedCode.codeGenerator(n);
+        GeneratedCode.codeLogic(n);
 
-            while (code.length() < n) {
-                code = GeneratedCode.codeGenerator(n);
-            }
 
-            System.out.println("The random secret number is " + code + ".");
+        InfoPrinting.startGameInfo();
+
+        while (Grader.isCodeCorrect()) {
+
+            System.out.println("Turn " + turnCounter + ":");
+            Grader.grader(scan.next());
+            turnCounter++;
+
         }
 
-       // Grader.grader();
+
+
 
 
 
     }
 }
-
 
 
 
